@@ -31,6 +31,7 @@ df_av_u = df_av_u.dropna(thresh=10,axis=1).fillna(0)
 ## Aplicação do método de Coeficiente de Correlação de Pearson, para obter o valor de similadirade entre os filmes através das avaliações do usuários.
 pearson = df_av_u.corr(method='pearson')
 
+
 ## Função que calcula o valor que será considerado para recomendar um filme ou não.
 ## Ele pega o valor de Pearson que definimos e multiplica esse valor pela avaliação do usuário.
 def recomendacao (f, au):
@@ -63,6 +64,8 @@ df_fs = pd.DataFrame()
 ## Loop que inseri os valores calculados pela função de recomendação em um dataframe
 for f,a in user:
     df_fs = df_fs.append(recomendacao(f,a))
+
+df_fs.to_csv("teste3.csv")
 
 ## Inserindo linha com a soma total dos valores da coluna para definir o valor de recomendação do filme.
 df_fs.loc['Total']= df_fs.sum(numeric_only=True, axis=0)
